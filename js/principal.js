@@ -36,7 +36,8 @@ $(".novoCartao").submit(function(event){
 	event.preventDefault(); //Previne recarregar a página (comportamento default do form)
 
 	var campoConteudo = $(".novoCartao-conteudo");
-	var conteudo = campoConteudo.val().trim();
+	//var conteudo = campoConteudo.val().formatText();
+	var conteudo = formatText(campoConteudo.val());
 
 	if(conteudo) {
 		contador++;
@@ -64,3 +65,9 @@ $(".novoCartao").submit(function(event){
 
 	campoConteudo.val("");	
 });
+
+function formatText (content) {
+	return content.trim().replace(/\n/g,"<br>")
+			   .replace(/\*\*(.*)\*\*/g,"<b>$1</b>") //Negrito com **Texto**
+			   .replace(/\*(.*)\*/g,"<em>$1</em>"); //Italico com *Texto*
+}

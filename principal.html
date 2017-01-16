@@ -7,6 +7,8 @@
 	<link rel="stylesheet" href="css/estilos.css">
 	<link rel="stylesheet" href="css/cabecalho.css">
 	<link rel="stylesheet" href="css/opcoesDaPagina.css">
+	<!--<link rel="stylesheet" href="css/opcoesDoCartao.css">-->
+	<link rel="stylesheet" href="css/novoCartao.css">
 </head>
 <body>
 	<header class="cabecalho container">		
@@ -15,8 +17,13 @@
 			<button id="mudaLayout" class="opcoesDaPagina-opcao opcoesDaPagina-botao">Linhas</button>
 		</div>
 	</header>
+	
+	<form action="" class="novoCartao container">
+			<textarea name="novoCartao-Conteudo" class="novoCartao-conteudo" placeholder="Digite aqui"></textarea>
+			<input type="submit" class="novoCartao-salvar" value="Salvar">
+	</form>
 
-	<section class="mural container">
+	<section class="mural container">		
 		<div class="cartao" id="cartao_1">
 			<button class="botao-remover opcoesDoCartao-remove" data-id="1">Remover</button>
 			<p class="cartao-conteudo">"Mussum Ipsum, cacilds vidis litro abertis. Nec orci ornare consequat. Praesent lacinia ultrices consectetur. Sed non ipsum felis. Não sou faixa preta cumpadi, sou preto inteiris, inteiris. Posuere libero varius. Nullam a nisl ut ante blandit hendrerit. Aenean sit amet nisi. Quem num gosta di mé, boa gente num é."</p>
@@ -39,6 +46,7 @@
 		</div>
 	</section>
 
-	<script src="js/principal.js"></script>		
+	<script src="js/jquery.js"></script>
+	<script src="js/principal.js"></script>	
 </body>
 </html>

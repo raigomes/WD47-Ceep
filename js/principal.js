@@ -55,9 +55,12 @@ $(".novoCartao").submit(function(event){
 		var conteudoTag = $("<p>").addClass("cartao-conteudo")
 								.append(conteudo);
 
+		var tipoCartao = decideTipoCartao(conteudo);
+
 		//Acrescenta o append para colocar a div opcoes no cartao
 		$("<div>").attr("id", "cartao_" + contador)
 				.addClass("cartao")
+				.addClass(tipoCartao)
 				.append(opcoes)
 				.append(conteudoTag)
 				.prependTo(".mural");
@@ -70,4 +73,30 @@ function formatText (content) {
 	return content.trim().replace(/\n/g,"<br>")
 			   .replace(/\*\*(.*)\*\*/g,"<b>$1</b>") //Negrito com **Texto**
 			   .replace(/\*(.*)\*/g,"<em>$1</em>"); //Italico com *Texto*
+}
+
+/* Tamanho dos textos dos cartoes*/
+function decideTipoCartao(conteudo) {
+	var quebras = conteudo.split("<br>").length;
+	var totalDeLetras = conteudo.replace(/<br>/g,"").length;
+
+	var ultimoMaior = "";
+	conteudo.replace(/<br>/g, " ")
+			.split(" ")
+			.forEach(function(palavra){
+				if(palavra.length > ultimoMaior.length) {
+					ultimoMaior = palavra;
+				}
+			});
+	var tamMaior = ultimoMaior.length;
+
+	var tipoCartao = "cartao--textoPequeno";
+	if (tamMaior < 9 && quebras < 5 && totalDeLetras < 55) {
+		tipoCartao = "cartao--textoGrande";
+	}
+	else if (tamMaior < 12 && quebras < 6 && totalDeLetras < 75) {
+		tipoCartao = "cartao--textoMedio";
+	}
+	console.log(quebras + " " + totalDeLetras + " " + tamMaior);
+	return tipoCartao;
 }

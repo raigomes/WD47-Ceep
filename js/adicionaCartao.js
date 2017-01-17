@@ -1,4 +1,7 @@
-(function() {
+var controladorCartao = (
+function() {
+	var contador = $(".cartao").length;
+
 	function adicionaCartao(conteudo, cor) {
 		contador++;
 
@@ -67,4 +70,9 @@
 			cartao.remove();
 		}, 400);
 	}
+
+	return {		
+		adicionaCartao: adicionaCartao,
+		idUltimoCartao: function() { return contador;}
+	};
 })();

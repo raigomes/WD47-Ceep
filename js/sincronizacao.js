@@ -8,7 +8,7 @@
 			var cartoes = res.cartoes;
 			console.log(cartoes.length + " carregados em " + res.usuario);
 			cartoes.forEach(function(cartao){
-				adicionaCartao(cartao.conteudo);
+				controladorCartao.adicionaCartao(cartao.conteudo);
 			});
 		}
 	)

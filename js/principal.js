@@ -40,30 +40,7 @@ $(".novoCartao").submit(function(event){
 	var conteudo = formatText(campoConteudo.val());
 
 	if(conteudo) {
-		contador++;
-
-		//cria o botao de remover
-		var botaoRemove = $("<button>").addClass("opcoesDoCartao-remove")
-									   .attr("data-id", contador)
-									   .text("Remover")
-									   .click(removeCartao);
-
-		//cria a div de opçoes
-		var opcoes = $("<div>").addClass("opcoesDoCartao")
-							   .append(botaoRemove);
-
-		var conteudoTag = $("<p>").addClass("cartao-conteudo")
-								.append(conteudo);
-
-		var tipoCartao = decideTipoCartao(conteudo);
-
-		//Acrescenta o append para colocar a div opcoes no cartao
-		$("<div>").attr("id", "cartao_" + contador)
-				.addClass("cartao")
-				.addClass(tipoCartao)
-				.append(opcoes)
-				.append(conteudoTag)
-				.prependTo(".mural");
+		adicionaCartao(conteudo); /* REFATORAÇÃO: conteudo incluido na função adicionaCartao() */		
 	}
 
 	campoConteudo.val("");	
@@ -117,3 +94,42 @@ $("#busca").on("input", function(){
 	}
 		
 });
+
+/* Botão Ajuda - Cartões via GetJSON (AJAX)*/
+$("#ajuda").click(function(){
+	$.getJSON("https://ceep.herokuapp.com/cartoes/instrucoes", function(res) {
+		console.log(res);
+
+		res.instrucoes.forEach(function(instrucao) {
+			adicionaCartao(instrucao.conteudo, instrucao.cor);
+		});
+	});
+});
+
+function adicionaCartao(conteudo, cor) {
+	contador++;
+
+	//cria o botao de remover
+	var botaoRemove = $("<button>").addClass("opcoesDoCartao-remove")
+								   .attr("data-id", contador)
+								   .text("Remover")
+								   .click(removeCartao);
+
+	//cria a div de opçoes
+	var opcoes = $("<div>").addClass("opcoesDoCartao")
+						   .append(botaoRemove);
+
+	var conteudoTag = $("<p>").addClass("cartao-conteudo")
+							.append(conteudo);
+
+	var tipoCartao = decideTipoCartao(conteudo);
+
+	//Acrescenta o append para colocar a div opcoes no cartao
+	$("<div>").attr("id", "cartao_" + contador)
+			.addClass("cartao")
+			.addClass(tipoCartao)
+			.append(opcoes)
+			.append(conteudoTag)
+			.css("background-color", cor)
+			.prependTo(".mural");
+}

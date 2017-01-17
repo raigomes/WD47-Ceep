@@ -1,5 +1,7 @@
 var controladorCartao = (
 function() {
+	"use strict";
+	
 	var contador = $(".cartao").length;
 
 	function adicionaCartao(conteudo, cor) {

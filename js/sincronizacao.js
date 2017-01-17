@@ -1,4 +1,6 @@
-(function() {
+(function(controlador) {
+	"use strict";
+	
 	var usuario = "raigomes2@hotmail.com";
 	/* Carregar cartões do servidor com JSONP */
 	$.getJSON(
@@ -8,7 +10,7 @@
 			var cartoes = res.cartoes;
 			console.log(cartoes.length + " carregados em " + res.usuario);
 			cartoes.forEach(function(cartao){
-				controladorCartao.adicionaCartao(cartao.conteudo);
+				controlador.adicionaCartao(cartao.conteudo);
 			});
 		}
 	)
@@ -49,4 +51,4 @@
 			}
 		});
 	});
-})();
+})(controladorCartao);

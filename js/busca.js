@@ -1,5 +1,7 @@
 /* Busca de cartões*/
 (function() {
+	"use strict";
+	
 	$("#busca").on("input", function(){	
 		var busca = $(this).val();
 

@@ -1,5 +1,7 @@
 /* Mudar layout do Mural */
 (function() {
+	"use strict";
+	
 	document.querySelector("#mudaLayout").addEventListener("click", function(){
 		var mural = document.querySelector(".mural");
 

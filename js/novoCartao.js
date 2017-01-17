@@ -1,5 +1,6 @@
 /* Adicionar Cartoes com JQuery */
-(function() {	
+(function(controlador) {
+	"use strict";
 	$(".novoCartao").submit(function(event){
 		event.preventDefault(); //Previne recarregar a página (comportamento default do form)
 
@@ -8,7 +9,7 @@
 		var conteudo = formatText(campoConteudo.val());
 
 		if(conteudo) {
-			controladorCartao.adicionaCartao(conteudo); /* REFATORAÇÃO: conteudo incluido na função adicionaCartao() */		
+			controlador.adicionaCartao(conteudo); /* REFATORAÇÃO: conteudo incluido na função adicionaCartao() */		
 		}
 
 		campoConteudo.val("");	
@@ -19,4 +20,4 @@
 				   .replace(/\*\*(.*)\*\*/g,"<b>$1</b>") //Negrito com **Texto**
 				   .replace(/\*(.*)\*/g,"<em>$1</em>"); //Italico com *Texto*
 	}
-})();
+})(controladorCartao);

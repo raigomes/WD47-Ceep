@@ -133,3 +133,38 @@ function adicionaCartao(conteudo, cor) {
 			.css("background-color", cor)
 			.prependTo(".mural");
 }
+
+/* Salvar Cartões com AJAX */
+$("#sync").click(function () {
+	$("#sync").removeClass("botaoSync--sincronizado");
+	$("#sync").addClass("botaoSync--esperando");
+
+	var cartoes = [];
+
+	$(".cartao").each(function() {
+		var cartao = {};
+
+		cartao.conteudo = $(this).find(".cartao-conteudo").html();
+		cartoes.push(cartao);
+	});
+
+	var mural = {
+		usuario: "raigomes2@hotmail.com",
+		cartoes: cartoes
+	}
+
+	$.ajax({
+		url: "https://ceep.herokuapp.com/cartoes/salvar",
+		method: "POST",
+		data: mural,
+		success: function (res) {
+			console.log(res.quantidade + " cartões salvos em " + res.usuario);
+		},
+		error: function () {
+			console.log("Não foi possível salvar o mural");
+		},
+		complete: function() {
+			$("#sync").removeClass("botaoSync--esperando");
+		}
+	});
+});

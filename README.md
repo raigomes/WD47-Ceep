@@ -12,3 +12,4 @@ You might not need JQuery: http://bit.ly/not-jquery/
 Dontpad: http://dontpad.com/wd6657/
 Can I use (suporte de html e css pelos browsers): http://caniuse.com/
 Podcasts de Tecnologia da Alura: http://hipsters.tech/
+Configurar CORS: http://enable-cors.org/

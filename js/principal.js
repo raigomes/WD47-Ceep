@@ -135,6 +135,8 @@ function adicionaCartao(conteudo, cor) {
 }
 
 /* Salvar Cartões com AJAX */
+var usuario = "raigomes2@hotmail.com";
+
 $("#sync").click(function () {
 	$("#sync").removeClass("botaoSync--sincronizado");
 	$("#sync").addClass("botaoSync--esperando");
@@ -149,7 +151,7 @@ $("#sync").click(function () {
 	});
 
 	var mural = {
-		usuario: "raigomes2@hotmail.com",
+		usuario: usuario,
 		cartoes: cartoes
 	}
 
@@ -158,9 +160,11 @@ $("#sync").click(function () {
 		method: "POST",
 		data: mural,
 		success: function (res) {
+			$("#sync").addClass("botaoSync--sincronizado");
 			console.log(res.quantidade + " cartões salvos em " + res.usuario);
 		},
 		error: function () {
+			$("#sync").addClass("botaoSync--deuRuim");
 			console.log("Não foi possível salvar o mural");
 		},
 		complete: function() {
@@ -168,3 +172,17 @@ $("#sync").click(function () {
 		}
 	});
 });
+
+/* Carregar cartões do servidor com JSONP */
+$.getJSON(
+	"https://ceep.herokuapp.com/cartoes/carregar?callback=?",
+	{usuario: usuario},
+	function(res) {
+		var cartoes = res.cartoes;
+		console.log(cartoes.length + " carregados em " + res.usuario);
+		cartoes.forEach(function(cartao){
+			adicionaCartao(cartao.conteudo);
+		});
+	}
+);
+

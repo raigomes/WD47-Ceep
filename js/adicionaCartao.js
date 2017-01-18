@@ -3,14 +3,17 @@ function() {
 	"use strict";
 	
 	var contador = $(".cartao").length;
+	var intervaloSyncEdicao;
 
 	function adicionaCartao(conteudo, cor) {
 		contador++;
 		
-		//cria as opçoes de remoção e ediçaõ de cartão
+		//cria as opçoes de remoção e edição de cartão
 		var opcoes = criaOpcoesDoCartao(contador);
 
 		var conteudoTag = $("<p>").addClass("cartao-conteudo")
+								  .attr("contenteditable", true)
+								  .on("input", editaCartaoHandler)
 								  .append(conteudo);
 
 		var tipoCartao = decideTipoCartao(conteudo);
@@ -50,6 +53,14 @@ function() {
 		}
 		//console.log(quebras + " " + totalDeLetras + " " + tamMaior);
 		return tipoCartao;
+	}
+
+	function editaCartaoHandler(event) {
+		clearTimeout(intervaloSyncEdicao);
+
+		intervaloSyncEdicao = setTimeout(function(){
+			$(document).trigger("precisaSincronizar");
+		}, 1000);
 	}
 
 	return {		

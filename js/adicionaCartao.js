@@ -6,30 +6,24 @@ function() {
 
 	function adicionaCartao(conteudo, cor) {
 		contador++;
-
-		//cria o botao de remover
-		var botaoRemove = $("<button>").addClass("opcoesDoCartao-remove")
-		.attr("data-id", contador)
-		.text("Remover")
-		.click(removeCartao);
-
-		//cria a div de opçoes
-		var opcoes = $("<div>").addClass("opcoesDoCartao")
-		.append(botaoRemove);
+		
+		//cria as opçoes de remoção e ediçaõ de cartão
+		var opcoes = criaOpcoesDoCartao(contador);
 
 		var conteudoTag = $("<p>").addClass("cartao-conteudo")
-		.append(conteudo);
+								  .append(conteudo);
 
 		var tipoCartao = decideTipoCartao(conteudo);
 
 		//Acrescenta o append para colocar a div opcoes no cartao
 		$("<div>").attr("id", "cartao_" + contador)
-		.addClass("cartao")
-		.addClass(tipoCartao)
-		.append(opcoes)
-		.append(conteudoTag)
-		.css("background-color", cor)
-		.prependTo(".mural");		
+				  .attr("tabindex", 0)
+				  .addClass("cartao")
+				  .addClass(tipoCartao)
+				  .append(opcoes)
+				  .append(conteudoTag)
+				  .css("background-color", cor)
+				  .prependTo(".mural");		
 	}
 
 	/* Tamanho dos textos dos cartoes*/
@@ -58,27 +52,8 @@ function() {
 		return tipoCartao;
 	}
 
-	/* Remover Cartoes */
-	var botoes = document.querySelectorAll(".botao-remover");
-	for (var i = 0; i < botoes.length; i++) {
-		botoes[i].addEventListener("click", removeCartao);
-	}
-
-	function removeCartao () {
-		var cartao = document.querySelector("#cartao_" + this.dataset.id);
-		console.log(cartao);	
-		cartao.classList.add("cartao--some");
-		setTimeout(function() {
-			cartao.remove();
-		}, 400);
-
-		$(document).trigger("precisaSincronizar");
-	}
-
-
-
 	return {		
 		adicionaCartao: adicionaCartao,
 		idUltimoCartao: function() { return contador;}
 	};	
-})();
+})(criaOpcoesDoCartao);

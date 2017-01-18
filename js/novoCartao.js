@@ -9,7 +9,8 @@
 		var conteudo = formatText(campoConteudo.val());
 
 		if(conteudo) {
-			controlador.adicionaCartao(conteudo); /* REFATORAÇÃO: conteudo incluido na função adicionaCartao() */			
+			controlador.adicionaCartao(conteudo); /* REFATORAÇÃO: conteudo incluido na função adicionaCartao() */
+			$(document).trigger("precisaSincronizar");		
 		}
 
 		campoConteudo.val("");

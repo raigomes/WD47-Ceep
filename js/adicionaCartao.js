@@ -29,9 +29,7 @@ function() {
 		.append(opcoes)
 		.append(conteudoTag)
 		.css("background-color", cor)
-		.prependTo(".mural");
-
-		$(document).trigger("precisaSincronizar");
+		.prependTo(".mural");		
 	}
 
 	/* Tamanho dos textos dos cartoes*/

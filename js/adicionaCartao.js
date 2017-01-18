@@ -30,6 +30,8 @@ function() {
 		.append(conteudoTag)
 		.css("background-color", cor)
 		.prependTo(".mural");
+
+		$(document).trigger("precisaSincronizar");
 	}
 
 	/* Tamanho dos textos dos cartoes*/
@@ -71,10 +73,14 @@ function() {
 		setTimeout(function() {
 			cartao.remove();
 		}, 400);
+
+		$(document).trigger("precisaSincronizar");
 	}
+
+
 
 	return {		
 		adicionaCartao: adicionaCartao,
 		idUltimoCartao: function() { return contador;}
-	};
+	};	
 })();

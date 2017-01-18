@@ -1,6 +1,6 @@
 /* Adicionar Cartoes com JQuery */
 (function(controlador) {
-	"use strict";
+	"use strict";	
 	$(".novoCartao").submit(function(event){
 		event.preventDefault(); //Previne recarregar a página (comportamento default do form)
 
@@ -9,10 +9,10 @@
 		var conteudo = formatText(campoConteudo.val());
 
 		if(conteudo) {
-			controlador.adicionaCartao(conteudo); /* REFATORAÇÃO: conteudo incluido na função adicionaCartao() */		
+			controlador.adicionaCartao(conteudo); /* REFATORAÇÃO: conteudo incluido na função adicionaCartao() */			
 		}
 
-		campoConteudo.val("");	
+		campoConteudo.val("");
 	});
 
 	function formatText (content) {

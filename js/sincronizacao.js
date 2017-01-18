@@ -15,10 +15,17 @@
 		}
 	)
 
-	/* Salvar Cartões com AJAX */
-	$("#sync").click(function () {
+	/*Trigga evento precisaSincronizar no documento ao clicar no botão*/
+	$("#sync").click(function(){
+		$(document).trigger("precisaSincronizar");
+	});
+
+	/* Salvar Cartões com AJAX e um evento personalizado*/
+	$(document).on("precisaSincronizar", function () {
 		$("#sync").removeClass("botaoSync--sincronizado");
 		$("#sync").addClass("botaoSync--esperando");
+
+		console.log($("#sync"));
 
 		var cartoes = [];
 

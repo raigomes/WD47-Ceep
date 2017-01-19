@@ -11,9 +11,8 @@
 #npm install --save-dev gulp-imagemin
 #npm install --save-dev imagemin-pngquant
 
-#npm run gulp clean
-#npm run gulp copy
+npm run gulp
 #npm run gulp prefix
-npm run gulp usemin
-npm run gulp imagemin
+#npm run gulp usemin
+#npm run gulp imagemin
 npm run gulp server

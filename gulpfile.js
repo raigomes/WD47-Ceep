@@ -11,7 +11,7 @@ var imageminPNGQuant = require("imagemin-pngquant");
 
 /* ### Tasks definidas ### */
 gulp.task("default", function() {
-	console.log("Hello Gulp");
+	gulp.start("usemin", "imagemin");
 });
 
 //Limpar página de backup

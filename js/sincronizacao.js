@@ -10,7 +10,7 @@
 			var cartoes = res.cartoes;
 			console.log(cartoes.length + " carregados em " + res.usuario);
 			cartoes.forEach(function(cartao){
-				controlador.adicionaCartao(cartao.conteudo);
+				controlador.adicionaCartao(cartao.conteudo, cartao.cor);
 			});
 		}
 	)
@@ -33,6 +33,8 @@
 			var cartao = {};
 
 			cartao.conteudo = $(this).find(".cartao-conteudo").html();
+			cartao.cor = $(this).css("background-color");
+
 			cartoes.push(cartao);
 		});
 

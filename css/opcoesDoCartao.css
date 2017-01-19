@@ -36,3 +36,24 @@
 .opcoesDoCartao-edita {
 	background-image: url("../img/edit.svg");
 }
+
+.opcoesDoCartao-cores {
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: .3em;
+}
+
+.opcoesDoCartao-radioCor {
+	display: none;
+}
+
+.opcoesDoCartao-cor {
+	background: currentcolor;
+	border-color: rgba(0,0,0,.5);
+	box-sizing: border-box;
+}
+
+.opcoesDoCartao-radioCor:checked + .opcoesDoCartao-cor {
+	background: currentcolor;
+	border: 5px solid rgba(0,0,0,.5);
+}

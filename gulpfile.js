@@ -2,6 +2,7 @@
 var gulp = require("gulp");
 var prefixer = require("gulp-autoprefixer");
 var clean = require("gulp-clean");
+var browserSync = require("browser-sync");
 
 /* ### Tasks definidas ### */
 gulp.task("default", function() {
@@ -28,3 +29,14 @@ gulp.task("prefix", ["copy"], function() {
 			   }))
 			   .pipe(gulp.dest("dist/css"));
 });	
+
+/* Recarrega servidor após alguma alteração*/
+gulp.task("server", function() {
+	browserSync.init({
+		server: {
+			baseDir: "./src"
+		}
+	});
+
+	gulp.watch("src/**/*").on("change", browserSync.reload);
+})

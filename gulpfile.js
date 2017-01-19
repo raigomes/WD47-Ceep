@@ -4,6 +4,10 @@ var prefixer = require("gulp-autoprefixer");
 var clean = require("gulp-clean");
 var browserSync = require("browser-sync");
 var usemin = require("gulp-usemin");
+var cleanCSS = require("gulp-clean-css");
+var uglify = require("gulp-uglify");
+var imagemin = require("gulp-imagemin");
+var imageminPNGQuant = require("imagemin-pngquant");
 
 /* ### Tasks definidas ### */
 gulp.task("default", function() {
@@ -46,8 +50,20 @@ gulp.task("server", function() {
 gulp.task("usemin", ["copy"], function() {
 	return gulp.src("src/*.html")
 			   .pipe(usemin({
-			   		css: [],
-			   		js: []
+			   		css: [cleanCSS],
+			   		js: [uglify]
 			   }))
 			   .pipe(gulp.dest("dist"));
 });
+
+/* Minifica as imagens, deixando-as com tamanho reduzido*/
+gulp.task("imagemin", ["copy"], function() {
+	return gulp.src("src/img/**/*")
+			   .pipe(imagemin([
+			   		imagemin.gifsicle(),
+			   		imagemin.jpegtran(),
+			   		imageminPNGQuant(),
+			   		imagemin.svgo()
+			   	]))
+			   .pipe(gulp.dest("dist/img"));
+})

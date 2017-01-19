@@ -14,3 +14,4 @@ Can I use (suporte de html e css pelos browsers): http://caniuse.com/
 Podcasts de Tecnologia da Alura: http://hipsters.tech/
 Configurar CORS: http://enable-cors.org/
 Compatibilidade de features e versoes do JS: http://bit.ly/wd-js-compatibilidade/
+Compressor de imagem: https://tinypng.com/

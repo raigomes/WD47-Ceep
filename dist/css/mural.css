@@ -1,0 +1,18 @@
+.mural {
+	font-size: 1.2 rem;
+}
+
+@media (min-width: 610px) {
+	.mural {
+		-ms-flex-align: start;
+		    align-items: flex-start;		
+	}
+}
+
+@media (min-width: 900px) {
+	.mural {		
+		-ms-flex-align: center;		
+		    align-items: center;
+		font-size: 1.3rem;
+	}
+}

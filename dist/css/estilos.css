@@ -24,21 +24,17 @@ body {
 }
 
 .mural {
-	display: -ms-flexbox;
 	display: flex;
 	text-align: center;
-	-ms-flex-wrap: wrap;
-	    flex-wrap: wrap;
+	flex-wrap: wrap;
 }
 
 .mural--linhas {
-	-ms-flex-direction: column;
-	    flex-direction: column;
+	flex-direction: column;
 }
 
 .mural--linhas .cartao {
-	-ms-flex-preferred-size: auto;
-	    flex-basis: auto;
+	flex-basis: auto;
 	width: auto;
 	display: block;
 }
@@ -50,10 +46,8 @@ body {
 	text-align: left;
 	/* Indica que o width é o tamanho até a borda, nao somente o conteudo */
 	box-sizing: border-box;
-	-ms-flex-positive: 1;
-	    flex-grow: 1;
-	-ms-flex-preferred-size: 190px;
-	    flex-basis: 190px;
+	flex-grow: 1;
+	flex-basis: 190px;
 	flex-grow: 1;
 }
 

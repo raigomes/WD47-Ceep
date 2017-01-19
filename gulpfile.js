@@ -3,6 +3,7 @@ var gulp = require("gulp");
 var prefixer = require("gulp-autoprefixer");
 var clean = require("gulp-clean");
 var browserSync = require("browser-sync");
+var usemin = require("gulp-usemin");
 
 /* ### Tasks definidas ### */
 gulp.task("default", function() {
@@ -39,4 +40,14 @@ gulp.task("server", function() {
 	});
 
 	gulp.watch("src/**/*").on("change", browserSync.reload);
-})
+});
+
+/* Unifica os arquivos CSS e JS para diminuir o número de requisições*/
+gulp.task("usemin", ["copy"], function() {
+	return gulp.src("src/*.html")
+			   .pipe(usemin({
+			   		css: [],
+			   		js: []
+			   }))
+			   .pipe(gulp.dest("dist"));
+});

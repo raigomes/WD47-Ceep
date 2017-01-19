@@ -8,34 +8,15 @@ var cleanCSS = require("gulp-clean-css");
 var uglify = require("gulp-uglify");
 var imagemin = require("gulp-imagemin");
 var imageminPNGQuant = require("imagemin-pngquant");
+var sass = require("gulp-sass");
+var runSequence = require("run-sequence");
 
 /* ### Tasks definidas ### */
-gulp.task("default", function() {
-	gulp.start("usemin", "imagemin");
+gulp.task("default", function() {	
+	runSequence("usemin", "imagemin");
 });
 
-//Limpar página de backup
-gulp.task("clean", function() {
-	return gulp.src("dist")
-			   .pipe(clean());
-})
-
-//Fazer backup da página src
-gulp.task("copy", ["clean"], function() {
-	return gulp.src("src/**/*")
-			   .pipe(gulp.dest("dist"));
-});
-
-//Incluindo prefixos de navegador nos arquivos CSS
-gulp.task("prefix", ["copy"], function() {
-	return gulp.src("dist/css/*.css")
-			   .pipe(prefixer({
-			   		browsers: ["last 2 versions", "IE 10"]
-			   }))
-			   .pipe(gulp.dest("dist/css"));
-});	
-
-/* Recarrega servidor após alguma alteração*/
+/* BROWSERSYNC: Recarrega servidor após alguma alteração*/
 gulp.task("server", function() {
 	browserSync.init({
 		server: {
@@ -46,8 +27,40 @@ gulp.task("server", function() {
 	gulp.watch("src/**/*").on("change", browserSync.reload);
 });
 
+//Limpar página de backup
+gulp.task("clean", function() {
+	return gulp.src("dist")
+			   .pipe(clean());
+})
+
+//Fazer backup da página src
+gulp.task("copySrc", ["clean"], function() {
+	gulp.src("src/css/**/*")
+	   .pipe(gulp.dest("dist/css"))
+	gulp.src("src/js/**/*")
+		.pipe(gulp.dest("dist/js"))
+	gulp.src("src/**/*.html")
+		.pipe(gulp.dest("dist"));
+});
+
+/* Compila código SASS*/
+gulp.task("sass", ["copySrc"], function() {
+	return gulp.src("dist/scss/*.scss")
+			   .pipe(sass().on("error", sass.logError))
+			   .pipe(gulp.dest("dist/css"));
+});
+
+//Incluindo prefixos de navegador nos arquivos CSS
+gulp.task("prefix", ["sass"], function() {
+	return gulp.src("dist/css/*.css")
+			   .pipe(prefixer({
+			   		browsers: ["last 2 versions", "IE 10"]
+			   }))
+			   .pipe(gulp.dest("dist/css"));
+});
+
 /* Unifica os arquivos CSS e JS para diminuir o número de requisições*/
-gulp.task("usemin", ["copy"], function() {
+gulp.task("usemin", ["prefix"], function() {
 	return gulp.src("src/*.html")
 			   .pipe(usemin({
 			   		css: [cleanCSS],
@@ -56,8 +69,14 @@ gulp.task("usemin", ["copy"], function() {
 			   .pipe(gulp.dest("dist"));
 });
 
+//Fazer backup da página img
+gulp.task("copyImg", function() {
+	return gulp.src("src/img/**/*")
+			   .pipe(gulp.dest("dist/img"));
+});
+
 /* Minifica as imagens, deixando-as com tamanho reduzido*/
-gulp.task("imagemin", ["copy"], function() {
+gulp.task("imagemin", ["copyImg"], function() {
 	return gulp.src("src/img/**/*")
 			   .pipe(imagemin([
 			   		imagemin.gifsicle(),
@@ -66,4 +85,4 @@ gulp.task("imagemin", ["copy"], function() {
 			   		imagemin.svgo()
 			   	]))
 			   .pipe(gulp.dest("dist/img"));
-})
+});

@@ -10,6 +10,8 @@
 #npm install --save-dev gulp-uglify
 #npm install --save-dev gulp-imagemin
 #npm install --save-dev imagemin-pngquant
+#npm install --save-dev gulp-sass
+#npm install --save-dev run-sequence
 
 npm run gulp
 #npm run gulp prefix
